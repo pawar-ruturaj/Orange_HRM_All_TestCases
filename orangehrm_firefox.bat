@@ -1,0 +1,1 @@
+pytest -v --html=Reports\batfilereport.html -n=3 --browser firefox

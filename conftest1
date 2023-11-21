@@ -1,0 +1,20 @@
+# this conftest for repetitive calling of url.
+
+
+import pytest
+from selenium import webdriver
+
+
+@pytest.fixture()
+def setup():
+    driver = webdriver.Chrome()
+    driver.implicitly_wait(3)
+    driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+    return driver
+
+# use this setup in test_login file
+# remove
+#     driver = webdriver.Chrome()
+#     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+# insert setup in method as parameter. replace all driver into self.driver.
+# refer file

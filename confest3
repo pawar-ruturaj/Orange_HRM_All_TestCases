@@ -1,0 +1,16 @@
+
+# this conftest for common file and readconfig.
+# no need to take url because we take url from common files.
+
+import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+chrome_options = Options()  # changes for headless
+chrome_options.add_argument("headless") # changes for headless
+
+
+@pytest.fixture()
+def setup():
+    driver = webdriver.Chrome(options=chrome_options)  # changes for headless
+    driver.implicitly_wait(3)
+    return driver

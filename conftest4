@@ -1,0 +1,49 @@
+# this conftest for cross-browsing.
+
+# without changing the code we can open browser in which we want to run testcases, we define browser in the terminal
+# while executing test cases. for that we use hookup functions, we create that function in conftest file.
+# hookup function--> it will extend/modify/ customise the behavior of pytest run. we tell pytest to run test as
+# we said in command
+# we define method in conftest for hookup.
+# now we can run in the terminal with browser name.
+# e.g. pytest -v --browser chrome
+#      pytest -v --browser edge
+#      pytest -v --browser firefox
+#      pytest -v      --> for headless execution.
+
+# by using this method we're done cross-browser testing.
+# cross-browser testing by manual testing is not good practice, we use automation for that testing.
+
+import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+
+def pytest_addoption(parser):
+    parser.addoption("--browser")
+
+@pytest.fixture()
+def browser(request):
+    return request.config.getoption("--browser")
+
+@pytest.fixture()
+def setup(browser):
+
+    if browser== 'chrome':
+        driver= webdriver.Chrome()
+
+    elif browser == 'firefox':
+        driver = webdriver.Firefox()
+
+    elif browser == 'edge':
+        driver = webdriver.Edge()
+
+    else:
+        chrome_options = Options()
+        chrome_options.add_argument("headless")
+        driver = webdriver.Chrome(options=chrome_options)
+
+    driver.implicitly_wait(3)
+    driver.maximize_window()
+    return driver
+
