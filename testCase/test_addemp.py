@@ -1,4 +1,5 @@
 # this file for maintain logs.
+import time
 
 from selenium.webdriver.common.by import By
 
@@ -42,6 +43,7 @@ class Test_Addemp:
         self.log.info("Entering Middlename")
         self.ae.Enter_Lastname("Pawar")
         self.log.info("Entering Lastname")
+        time.sleep(1)
         self.ae.Click_Save_buttton()
         self.log.info("Click on Save Button")
 

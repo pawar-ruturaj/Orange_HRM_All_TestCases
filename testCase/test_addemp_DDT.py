@@ -43,9 +43,9 @@ class Test_Addemp_DDT:
         status_list = []
         for r in range(2, self.rows + 1):
             self.rows = XLutils.getrowCount(self.path, "Sheet1")  # here we give a path of Excel file and sheetname.
-            self.FirstName = XLutils.readData(self.path, "Sheet1", r, 2) # get the first name from Excel.
-            self.MiddleName = XLutils.readData(self.path, "Sheet1", r, 3) # get middle name from Excel.
-            self.LastName = XLutils.readData(self.path, "Sheet1", r, 4) # get the last name from Excel.
+            self.FirstName = XLutils.readData(self.path, "Sheet1", r, 2)  # get the first name from Excel.
+            self.MiddleName = XLutils.readData(self.path, "Sheet1", r, 3)  # get middle name from Excel.
+            self.LastName = XLutils.readData(self.path, "Sheet1", r, 4)  # get the last name from Excel.
             time.sleep(2)
             self.ae.Enter_Firstname(self.FirstName)
             self.log.info("Entering Firstname-->" + self.FirstName)
@@ -60,17 +60,13 @@ class Test_Addemp_DDT:
             if self.ae.Addemp_success() == True:
                 self.ae.Click_Add_Employee()
                 status_list.append("Pass")
-                XLutils.writeData(self.path, "Sheet1", r, 5,"Pass") # to write data in Excel
+                XLutils.writeData(self.path, "Sheet1", r, 5, "Pass")  # to write data in Excel
                 self.driver.save_screenshot("D:\\OrangeHRMrevision\\Screenshots\\AddEmpSuccess.png")
-
-                self.log.info("test_addemp_ddt_05 is Passed")
-
 
             else:
                 status_list.append("Fail")
                 XLutils.writeData(self.path, "Sheet1", r, 5, "Fail")
                 self.driver.save_screenshot("D:\\OrangeHRMrevision\\Screenshots\\AddEmpFail.png")
-                self.log.info("test_addemp_ddt_05 is Failed")
 
         print(status_list)
         self.lp.Click_MenuButton()
@@ -79,8 +75,10 @@ class Test_Addemp_DDT:
         self.log.info("Click on Logout Button")
 
         if "Fail" not in status_list:
+            self.log.info("test_addemp_ddt_05 is Passed")
             assert True
         else:
+            self.log.info("test_addemp_ddt_05 is Failed")
             assert False
         self.driver.close()
         self.log.info("test_addemp_ddt_05 is completed")

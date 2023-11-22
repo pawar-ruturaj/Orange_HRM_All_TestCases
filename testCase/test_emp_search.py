@@ -15,7 +15,7 @@ class Test_emp_Search:
 
     def test_emp_search_04(self, setup):
         self.driver = setup
-        self.log.info("test_addemp_02 is started")
+        self.log.info("test_emp_search_04 is started")
         self.log.info("Opening Browser")
         self.driver.get(self.Url)
         self.log.info("Go to this url-->" + self.Url)
@@ -32,23 +32,26 @@ class Test_emp_Search:
         self.log.info("Click on PIM Button")
 
         self.se = EmployeeSearch(self.driver)
-        self.se.Enter_emp_name("Paul Brown")
+        self.se.Enter_emp_name("David")
+        time.sleep(2)
         self.se.Click_Search()
 
         if self.se.Search_Result() == True:
             self.log.info("Search Found")
-            self.log.info("test_search_emp_05 is Passed")
+            self.log.info("test_emp_search_04 is Passed")
             self.lp.Click_MenuButton()
             self.log.info("click on Menu button")
             self.lp.Click_Logout()
             self.log.info("click on Logout button")
             assert True
-            self.log.info("test_search_emp_05 is Passed")
+
         else:
             self.log.info("No Search Found")
             self.lp.Click_MenuButton()
             self.log.info("click on Menu button")
             self.lp.Click_Logout()
             self.log.info("click on Logout button")
-            self.log.info("test_search_emp_05 is Failed")
+            self.log.info("test_emp_search_04 is Failed")
             assert False
+        self.driver.close()
+        self.log.info("test_emp_search_04 is completed")
